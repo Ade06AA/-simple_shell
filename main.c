@@ -71,7 +71,6 @@ int mypathexec(char **tok, char **a)
 	char **to;
 	char *path = NULL;
 
-	//path = malloc(200);
 	path = getpath(a);
 	for (i = 0; path[i] != '='; ++i)
 		;
