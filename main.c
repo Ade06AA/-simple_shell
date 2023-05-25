@@ -16,9 +16,10 @@
 char *getpath(char **e)
 {
 	int i;
+
 	for (i = 0; e[i][0] != 'P' || e[i][1] != 'A'; i++)
 	{
-		if (e[i][2] != 'T'|| e[i][3] != 'H')
+		if (e[i][2] != 'T' || e[i][3] != 'H')
 			continue;
 		else
 			break;
@@ -33,6 +34,7 @@ char *getpath(char **e)
  * execute comands if given full path
 * @tokens: func arg 1
  * token of comand
+* @buff: func arg 2
 * Return: void
 */
 void myexec(char **tokens, char *buff)
@@ -54,7 +56,7 @@ void myexec(char **tokens, char *buff)
 
 
 
-/*
+/**
 * mypathexec - func name
  * handels command that are found in PATH
 * @tok: func arg 1
@@ -65,41 +67,47 @@ void myexec(char **tokens, char *buff)
 */
 int mypathexec(char **tok, char **a)
 {
-        int i, j;
-        char **token;
-        char *path;
+	int i, j = 0;
+	char **to;
+	char *path = NULL;
 
-        path = malloc(200);
-        path = getpath(a);
-        for (i = 0; path[i] != '='; ++i)
-                ;
-        i++;
-        token = mystrtok(path + i, ':');
-        for (i = 0; token[i] != NULL && (token[i][0] != 'P' && token[i][2] != 'O'); i++)
-        {
-                myjoin(&token[i], tok[0]);
-                if (!(access(token[i], F_OK)))
-                {
-                        j = fork();
-                        if (j == 0)
-                        {
-                                execve(token[i], tok, NULL);
-                                return (0);
-                        }
-                        else
-                        {
-                                wait(NULL);
-                                return (1);
-                        }
-                }
-        }
-        return (0);
+	//path = malloc(200);
+	path = getpath(a);
+	for (i = 0; path[i] != '='; ++i)
+		;
+	i++;
+	to = mystrtok(path + i, ':');
+	for (i = 0; to[i] != NULL && (to[i][0] != 'P' && to[i][2] != 'O'); i++)
+	{
+		myjoin(&to[i], tok[0]);
+		if (!(access(to[i], F_OK)))
+		{
+			j = fork();
+			if (j == 0)
+			{
+				execve(to[i], tok, NULL);
+				return (0);
+			}
+			else
+			{
+				wait(NULL);
+				myfree(to);
+				free(tok[i]);
+				return (1);
+			}
+		}
+	}
+	myfree(to);
+	free(tok[i]);
+	return (0);
 }
 
 /**
 * mygetinput - func name
 * @b: func arg 1
  * buffer to store input
+* @t: func arg 2
+* @l: func arg 3
 * Return: void
 */
 size_t mygetinput(char **b, int t, size_t *l)
@@ -132,15 +140,18 @@ size_t mygetinput(char **b, int t, size_t *l)
 * main - func name
  * the main function
  * the whole program tries to impliment a typical shell
+* @argc: func arg 1
+* @argv: func arg 2
+* @envp: func arg 3
+ * enviromental variable
 * Return: 0 if no problem was encounterd
 */
 int main(int argc, char **argv, char **envp)
 {
-	int i, j, loopc = 0, temp1 = 0, temp2 = 1;
+	int i, interractive, loopc = 0, temp1 = 0, temp2 = 1;
 	char *buff;
 	char **tokens;
 	size_t len = 0;
-	int interractive;
 
 	interractive = isatty(STDIN_FILENO);
 	while (true)
@@ -156,28 +167,8 @@ int main(int argc, char **argv, char **envp)
 		}
 		buff[i - 1] = '\0';
 		tokens = mystrtok(buff, ' ');
-		if(myexit2(tokens, buff, loopc, &temp1, &temp2))
+		if (myexit2(tokens, buff, loopc, &temp1, &temp2))
 			continue;
-		/*if (comp(tokens[0], "exit"))
-		{
-			if(mycheck(tokens))
-			{
-				fr(buff, tokens);
-				break;
-			}
-			else
-			{
-				if (myisnum(tokens[1]))
-				{
-					mystrtoi(tokens[1], &temp1, &temp2);
-					fr(buff, tokens);
-					return (temp1);
-				}
-				myerror(tokens, loopc);
-				fr(buff, tokens);
-				continue;
-			}
-		}*/
 		if (mybuiltin(tokens, envp))
 		{
 			fr(buff, tokens);
