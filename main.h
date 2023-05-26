@@ -8,6 +8,8 @@
 #include <stdio.h> /* getline */
 #include <sys/wait.h> /* wait */
 #define ARG_MAX 100000
+
+extern char **environ;
 /* sub1 */
 int comp(char *, char *);
 void mycopy(char **, char *);

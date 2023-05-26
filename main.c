@@ -44,7 +44,7 @@ void myexec(char **tokens, char *buff)
 	j = fork();
 	if (j == 0)
 	{
-		execve(tokens[0], tokens, NULL);
+		execve(tokens[0], tokens, environ);
 		exit(1);
 	}
 	else
@@ -84,7 +84,7 @@ int mypathexec(char **tok, char **a)
 			j = fork();
 			if (j == 0)
 			{
-				execve(to[i], tok, NULL);
+				execve(to[i], tok, environ);
 				return (0);
 			}
 			else
@@ -149,7 +149,7 @@ int main(__attribute((unused)) int argc,
 		__attribute((unused)) char **argv,
 		__attribute((unused)) char **envp)
 {
-	int i, interractive, loopc = 0, temp1 = 0, temp2 = 1;
+	int interractive, loopc = 0, temp1 = 0, temp2 = 1, i;
 	char *buff;
 	char **tokens;
 	size_t len = 0;
