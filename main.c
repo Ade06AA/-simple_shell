@@ -145,7 +145,9 @@ size_t mygetinput(char **b, int t, size_t *l)
  * enviromental variable
 * Return: 0 if no problem was encounterd
 */
-int main(int argc, char **argv, char **envp)
+int main(__attribute((unused)) int argc,
+		__attribute((unused)) char **argv,
+		__attribute((unused)) char **envp)
 {
 	int i, interractive, loopc = 0, temp1 = 0, temp2 = 1;
 	char *buff;
