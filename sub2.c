@@ -37,7 +37,8 @@ int mybuiltin(char **t, char **env)
 		while (t[i] != NULL)
 		{
 			mywrite(t[i++], STDOUT_FILENO);
-			write(STDOUT_FILENO, " ", 1);
+			if (t[i] != NULL)
+				write(STDOUT_FILENO, " ", 1);
 		}
 		write(STDOUT_FILENO, "\n", 1);
 		return (1);
@@ -59,7 +60,8 @@ int mybuiltin(char **t, char **env)
 		for (i = 0; env[i] != NULL; i++)
 		{
 			mywrite(env[i], STDOUT_FILENO);
-			write(STDOUT_FILENO, "\n", 1);
+			if (env[i] != NULL)
+				write(STDOUT_FILENO, "\n", 1);
 		}
 		return (1);
 	}
