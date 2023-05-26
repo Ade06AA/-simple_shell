@@ -109,9 +109,9 @@ int mypathexec(char **tok, char **a)
 * @l: func arg 3
 * Return: void
 */
-size_t mygetinput(char **b, int t, size_t *l)
+ssize_t mygetinput(char **b, int t, size_t *l)
 {
-	size_t i;
+	ssize_t i;
 
 	if (t)
 	{
