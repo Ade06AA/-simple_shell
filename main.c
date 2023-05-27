@@ -15,7 +15,7 @@
 */
 char *getpath(char **e)
 {
-	int i;
+	int i = NULL;
 
 	for (i = 0; e[i][0] != 'P' || e[i][1] != 'A'; i++)
 	{
@@ -39,7 +39,7 @@ char *getpath(char **e)
 */
 void myexec(char **tokens, char *buff)
 {
-	int j;
+	int j = NULL;
 
 	j = fork();
 	if (j == 0)
@@ -68,7 +68,7 @@ void myexec(char **tokens, char *buff)
 int mypathexec(char **tok, char **a)
 {
 	int i, j = 0;
-	char **to;
+	char **to = NULL;
 	char *path = NULL;
 
 	path = getpath(a);
@@ -111,7 +111,7 @@ int mypathexec(char **tok, char **a)
 */
 ssize_t mygetinput(char **b, int t, size_t *l)
 {
-	ssize_t i;
+	ssize_t i = 0;
 
 	if (t)
 	{
@@ -150,9 +150,9 @@ int main(__attribute((unused)) int argc,
 		__attribute((unused)) char **argv,
 		__attribute((unused)) char **envp)
 {
-	int interractive, loopc = 0, temp1 = 0, temp2 = 1, i;
-	char *buff;
-	char **tokens;
+	int interractive = 0, loopc = 0, temp1 = 0, temp2 = 1, i = 0;
+	char *buff NULL;
+	char **tokens = NULL;
 	size_t len = 0;
 
 	interractive = isatty(STDIN_FILENO);
