@@ -113,6 +113,8 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 {
 	ssize_t i = 0;
 
+	t = 1;
+
 	if (t)
 	{
 		i = getline(b, l, stdin);
