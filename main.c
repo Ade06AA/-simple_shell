@@ -125,6 +125,7 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 	}
 	else
 	{
+		*b = malloc(ARG_MAX);
 		i = read(STDIN_FILENO, *b, ARG_MAX);
 		if (i == -1 || i == 0)
 		{
@@ -188,6 +189,5 @@ int main(__attribute((unused)) int argc,
 		else
 			myexec(tokens, buff);
 	}
-	free(buff);
 	return (0);
 }
