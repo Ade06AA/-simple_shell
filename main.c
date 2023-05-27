@@ -123,7 +123,7 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 			free(*b);
 			if (t != 1)
 				write(STDOUT_FILENO, "\n", 1);
-			exit(0);
+			exit(127);
 		}
 	}
 	else
@@ -150,7 +150,7 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 * Return: 0 if no problem was encounterd
 */
 int main(__attribute((unused)) int argc,
-		__attribute((unused)) char **argv,
+		__attribute((unused)) char **av,
 		__attribute((unused)) char **envp)
 {
 	int interractive = 0, loopc = 0, temp1 = 0, temp2 = 1, i = 0;
@@ -171,8 +171,10 @@ int main(__attribute((unused)) int argc,
 			continue;
 		}
 		buff[i - 1] = '\0';
+		if (!(isnspace(buff)))
+			continue;
 		tokens = mystrtok(buff, ' ');
-		if (myexit2(tokens, buff, loopc, &temp1, &temp2))
+		if (myexit2(tokens, buff, loopc, &temp1, &temp2, av[0]))
 			continue;
 		if (mybuiltin(tokens, envp))
 		{
@@ -186,11 +188,11 @@ int main(__attribute((unused)) int argc,
 		}
 		if (access(tokens[0], F_OK))
 		{
-			myerror(tokens, loopc);
+			myerror(tokens, loopc, av[0]);
 			fr(buff, tokens);
 		}
 		else
 			myexec(tokens, buff);
 	}
-	return (0);
+	return (2);
 }

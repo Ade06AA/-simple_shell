@@ -29,10 +29,11 @@ ssize_t mygetline(char **, size_t *, int);
 
 /* sub 4 */
 int myisnum(char *);
-void myerror(char **, int);
+void myerror(char **, int, char *);
 void myjoin(char **, char *);
+int isnspace(char *);
 
 void mycheck2(char **);
 void prompt(int);
-int myexit2(char **, char *, int, int *, int *);
+int myexit2(char **, char *, int, int *, int *, char *);
 #endif

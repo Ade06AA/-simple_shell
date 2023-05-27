@@ -1,5 +1,24 @@
 #include "main.h"
 
+
+/**
+* isnspace - func name
+* @b: func arg 1
+* Return: int
+*/
+int isnspace(char *b)
+{
+	int i;
+
+	while (b[i] != '\0' && b[i] != '\n')
+	{
+		if (b[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 /**
 * myisnum - func name
  *  chaeck if a string is a number
@@ -24,13 +43,13 @@ int myisnum(char *s)
 * @b: func arg 2
 * Return: void
 */
-void myerror(char **a, int b)
+void myerror(char **a, int b, char *av1)
 {
 	char d[20];
 	int p = 0;
 
 	myitostr(b, d, &p);
-	mywrite(a[0], STDERR_FILENO);
+	mywrite(av1, STDERR_FILENO);
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, d, p);
 	write(STDERR_FILENO, ": ", 2);

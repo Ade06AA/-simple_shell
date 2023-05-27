@@ -24,7 +24,7 @@ void prompt(int i)
 * @temp2: func arg 5
 * Return: int
 */
-int myexit2(char **tokens, char *buff, int loopc, int *temp1, int *temp2)
+int myexit2(char **tokens, char *buff, int loopc, int *temp1, int *temp2, char *a)
 {
 	if (comp(tokens[0], "exit"))
 	{
@@ -42,7 +42,7 @@ int myexit2(char **tokens, char *buff, int loopc, int *temp1, int *temp2)
 				fr(buff, tokens);
 				exit(*temp1);
 			}
-			myerror(tokens, loopc);
+			myerror(tokens, loopc, a);
 			fr(buff, tokens);
 			return (1);
 		}
