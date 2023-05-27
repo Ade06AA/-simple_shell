@@ -15,7 +15,7 @@
 */
 char *getpath(char **e)
 {
-	int i = NULL;
+	int i = 0;
 
 	for (i = 0; e[i][0] != 'P' || e[i][1] != 'A'; i++)
 	{
