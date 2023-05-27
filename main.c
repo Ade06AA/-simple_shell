@@ -151,7 +151,7 @@ int main(__attribute((unused)) int argc,
 		__attribute((unused)) char **envp)
 {
 	int interractive = 0, loopc = 0, temp1 = 0, temp2 = 1, i = 0;
-	char *buff NULL;
+	char *buff  = NULL;
 	char **tokens = NULL;
 	size_t len = 0;
 
