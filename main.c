@@ -39,7 +39,7 @@ char *getpath(char **e)
 */
 void myexec(char **tokens, char *buff)
 {
-	int j = NULL;
+	int j = 0;
 
 	j = fork();
 	if (j == 0)
