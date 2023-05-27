@@ -91,13 +91,13 @@ int mypathexec(char **tok, char **a)
 			{
 				wait(NULL);
 				myfree(to);
-				free(tok[i]);
+				/*free(tok[i]);*/
 				return (1);
 			}
 		}
 	}
 	myfree(to);
-	free(tok[i]);
+	/*free(tok[i]);*/
 	return (0);
 }
 
@@ -188,5 +188,6 @@ int main(__attribute((unused)) int argc,
 		else
 			myexec(tokens, buff);
 	}
+	free(buff);
 	return (0);
 }

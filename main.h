@@ -12,7 +12,7 @@
 extern char **environ;
 /* sub1 */
 int comp(char *, char *);
-void mycopy(char **, char *);
+void mycopy(char **, char *, int);
 void myfree(char **);
 void fr(char *, char **);
 char **mystrtok(char *, char);
