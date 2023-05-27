@@ -31,8 +31,9 @@ int comp(char *terminal_input, char *b)
 void mycopy(char **a, char *b, int h)
 {
 	int i;
+	h = 0;
 	(*a) = malloc(ARG_MAX);
-	for (i = 0; b[i] != '\n' && b[i] != '\0'; i++)
+	for (i = 0; b[i] != '\n' && b[i] != '\0'; h++, i++)
 		(*a)[i] = b[i];
 	(*a)[i] = '\0';
 }
