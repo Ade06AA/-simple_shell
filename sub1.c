@@ -38,14 +38,7 @@ void mycopy(char **a, char *b, int h)
 	(*a)[i] = '\0';
 }
 
-void mycopy3(char (*a)[], char *b)
-{
-	int i;
-	/*(*a) = malloc(ARG_MAX);*/
-	for (i = 0; b[i] != '\n' && b[i] != '\0'; i++)
-		(*a)[i] = b[i];
-	(*a)[i] = '\0';
-}
+
 /**
 * myfree - func name
  * free a pointer to pointer and its content

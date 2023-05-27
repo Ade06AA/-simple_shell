@@ -25,6 +25,7 @@ int mycheck(char **);
 /* sub3 */
 void myitostr(unsigned int, char *, int *);
 void mystrtoi(char *, int *, int *);
+ssize_t mygetline(char **, size_t *, int);
 
 /* sub 4 */
 int myisnum(char *);

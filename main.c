@@ -159,7 +159,7 @@ int main(__attribute((unused)) int argc,
 	{
 		++loopc;
 		prompt(interractive);
-		buff = malloc(ARG_MAX);
+		buff = NULL;
 		i = mygetinput(&buff, interractive, &len);
 		if (i == 1)
 		{

@@ -31,7 +31,8 @@ int myexit2(char **tokens, char *buff, int loopc, int *temp1, int *temp2)
 		if (mycheck(tokens))
 		{
 			fr(buff, tokens);
-			exit(0);
+			_exit(0);
+			return (2);
 		}
 		else
 		{
