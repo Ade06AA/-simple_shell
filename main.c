@@ -113,7 +113,7 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 {
 	ssize_t i = 0;
 
-	t = 1;
+	t += 1;
 
 	if (t)
 	{
@@ -121,7 +121,8 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 		if (i == -1)
 		{
 			free(*b);
-			write(STDOUT_FILENO, "\n", 1);
+			if (t != 1)
+				write(STDOUT_FILENO, "\n", 1);
 			exit(0);
 		}
 	}
