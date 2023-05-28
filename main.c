@@ -109,7 +109,7 @@ int mypathexec(char **tok, char **a)
 * @l: func arg 3
 * Return: void
 */
-ssize_t mygetinput(char **b, int t, size_t *l)
+ssize_t mygetinput(char **b, int t, size_t *l, int e)
 {
 	ssize_t i = 0;
 
@@ -123,7 +123,7 @@ ssize_t mygetinput(char **b, int t, size_t *l)
 			free(*b);
 			if (t != 1)
 				write(STDOUT_FILENO, "\n", 1);
-			exit(127);
+			exit(e);
 		}
 	}
 	else
@@ -153,7 +153,7 @@ int main(__attribute((unused)) int argc,
 		__attribute((unused)) char **av,
 		__attribute((unused)) char **envp)
 {
-	int interractive = 0, loopc = 0, temp1 = 0, temp2 = 1, i = 0;
+	int interractive = 0, loopc = 0, temp1 = 0, temp2 = 1, e = 0, i = 0;
 	char *buff  = NULL;
 	char **tokens = NULL;
 	size_t len = 0;
@@ -164,7 +164,7 @@ int main(__attribute((unused)) int argc,
 		++loopc;
 		prompt(interractive);
 		buff = NULL;
-		i = mygetinput(&buff, interractive, &len);
+		i = mygetinput(&buff, interractive, &len, e);
 		if (i == 1)
 		{
 			free(buff);
@@ -175,7 +175,10 @@ int main(__attribute((unused)) int argc,
 			continue;
 		tokens = mystrtok(buff, ' ');
 		if (myexit2(tokens, buff, loopc, &temp1, &temp2, av[0]))
+		{
+			e = 2;
 			continue;
+		}
 		if (mybuiltin(tokens, envp))
 		{
 			fr(buff, tokens);
@@ -184,15 +187,20 @@ int main(__attribute((unused)) int argc,
 		if (mypathexec(tokens, envp))
 		{
 			fr(buff, tokens);
+			e = 0;
 			continue;
 		}
 		if (access(tokens[0], F_OK))
 		{
 			myerror(tokens, loopc, av[0]);
+			e = 127;
 			fr(buff, tokens);
 		}
 		else
+		{ 
+			e = 0;
 			myexec(tokens, buff);
+		}
 	}
 	return (2);
 }
